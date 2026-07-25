@@ -1,5 +1,5 @@
 const numeroSenha = document.querySelector('.parametro-senha__texto');
-let tamanhoSenha = 5;
+let tamanhoSenha = 12;
 numeroSenha.textContent = tamanhoSenha;
 const letrasMaiusculas = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const letrasMinusculas = 'abcdefghijklmnopqrstuvwxyz';
@@ -58,16 +58,20 @@ function geraSenha(){
         senha = senha + alfabeto[numeroAleatorio];
     }
     campoSenha.value = senha;
-    classificaSenha();
+    classificaSenha(alfabeto.length);
 }
 
-function classificaSenha(){
+function classificaSenha(tamanhoAlfabeto){
+    let entropia = tamanhoSenha * Math.log2(tamanhoAlfabeto);
+    console.log(entropia);
     forcaSenha.classList.remove('fraca', 'media', 'forte');
-    if (tamanhoSenha > 11){
+    if (entropia > 58){
         forcaSenha.classList.add('forte');
-    } else if (tamanhoSenha > 5 && tamanhoSenha < 12) {
+    } else if (entropia > 35 && entropia <= 58) {
         forcaSenha.classList.add('media');
-    } else if (tamanhoSenha <= 6){
+    } else if (entropia <= 35){
         forcaSenha.classList.add('fraca');
     }
+    const valorEntropia = document.querySelector('.entropia');
+    valorEntropia.textContent = "Um computador pode levar até " + Math.floor(2**entropia/(100e6*60*60*24)) + " dias";
 }
