@@ -154,6 +154,18 @@ label{
     bottom: 30px;
 }
 
+.botao-gerarsenha{
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+.btGerar{
+    padding: 15px 20px;
+    font-size: 18px;
+}
+
 @media screen and (min-width: 768px) {
     .parametro-coluna__senha{
         flex-direction: row;

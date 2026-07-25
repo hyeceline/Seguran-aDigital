@@ -19,7 +19,6 @@ function diminuiTamanho(){
         tamanhoSenha--;
     }
     numeroSenha.textContent = tamanhoSenha;
-    geraSenha();
 }
 
 function aumentaTamanho(){
@@ -28,14 +27,12 @@ function aumentaTamanho(){
         tamanhoSenha++;
     }
     numeroSenha.textContent = tamanhoSenha;
-    geraSenha();
 }
 
 for (i=0; i < checkbox.length;i++){
     checkbox[i].onclick = geraSenha;
 }
 
-geraSenha();
 
 function geraSenha(){
     let alfabeto = '';
@@ -52,6 +49,13 @@ function geraSenha(){
         alfabeto = alfabeto + simbolos;
     }
     let senha = '';
+
+    if (alfabeto.length === 0) {
+        campoSenha.value = "";
+        forcaSenha.classList.remove('fraca', 'media', 'forte');
+        return;
+    }
+
     for (let i = 0; i < tamanhoSenha;i++){
         let numeroAleatorio = Math.random()*alfabeto.length;
         numeroAleatorio = Math.floor(numeroAleatorio);
@@ -63,7 +67,6 @@ function geraSenha(){
 
 function classificaSenha(tamanhoAlfabeto){
     let entropia = tamanhoSenha * Math.log2(tamanhoAlfabeto);
-    console.log(entropia);
     forcaSenha.classList.remove('fraca', 'media', 'forte');
     if (entropia > 58){
         forcaSenha.classList.add('forte');
@@ -73,5 +76,6 @@ function classificaSenha(tamanhoAlfabeto){
         forcaSenha.classList.add('fraca');
     }
     const valorEntropia = document.querySelector('.entropia');
-    valorEntropia.textContent = "Um computador pode levar até " + Math.floor(2**entropia/(100e6*60*60*24)) + " dias";
-}
+    //valorEntropia.textContent = "Um computador pode levar até " + Math.floor(2**entropia/(100e6*60*60*24)) + " dias";
+}                  
+
